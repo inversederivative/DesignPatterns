@@ -8,7 +8,7 @@
 
 class Singleton {
 private:
-    std::string name, loves;
+    std::string name;
 
     static Singleton* instancePtr;
 
@@ -22,7 +22,6 @@ public:
     static Singleton* getInstance();
 
 };
-
 
 #endif //DESIGNPATTERNS_SINGLETON_H
 

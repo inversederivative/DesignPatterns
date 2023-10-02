@@ -3,6 +3,7 @@
 //
 #include <gtest/gtest.h>
 #include <Singleton.hpp>
+#include "../source/Singleton.cpp"
 
 // Test 1: Test that the Singleton class cannot be instantiated directly
 TEST(SingletonTest, CannotInstantiateDirectly) {
@@ -11,15 +12,15 @@ TEST(SingletonTest, CannotInstantiateDirectly) {
     EXPECT_EQ(std::is_constructible<Singleton>::value, false);
 }
 
-// Test 2: Test the creation of a Singleton instance
-//TEST(SingletonTest, SingletonInstanceIsCreatedCorrectly) {
-//    // Use the Singleton::getInstance() method to create an instance
-//    // Verify that the returned instance is not null and is of the correct type
-//    Singleton* instance = Singleton::getInstance();
-//    ASSERT_TRUE(instance != nullptr);
-//    ASSERT_TRUE(dynamic_cast<Singleton*>(instance) != nullptr);
-//}
-//
+//Test 2: Test the creation of a Singleton instance
+TEST(SingletonTest, SingletonInstanceIsCreatedCorrectly) {
+    // Use the Singleton::getInstance() method to create an instance
+    // Verify that the returned instance is not null and is of the correct type
+    Singleton* instance = Singleton::getInstance();
+    EXPECT_EQ(instance != nullptr, true);
+    EXPECT_EQ(dynamic_cast<Singleton*>(instance) != nullptr, true);
+}
+
 //// Test 3: Test that multiple calls to Singleton::getInstance() return the same instance
 //TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
 //    // Call Singleton::getInstance() multiple times and store the returned instances
