@@ -22,13 +22,13 @@ TEST(SingletonTest, SingletonInstanceIsCreatedCorrectly) {
 }
 
 //// Test 3: Test that multiple calls to Singleton::getInstance() return the same instance
-//TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
-//    // Call Singleton::getInstance() multiple times and store the returned instances
-//    // Verify that all instances are the same (point to the same memory address)
-//    Singleton* instance1 = Singleton::getInstance();
-//    Singleton* instance2 = Singleton::getInstance();
-//    ASSERT_TRUE(instance1 == instance2);
-//}
+TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
+    // Call Singleton::getInstance() multiple times and store the returned instances
+    // Verify that all instances are the same (point to the same memory address)
+    Singleton* instance1 = Singleton::getInstance();
+    Singleton* instance2 = Singleton::getInstance();
+    EXPECT_EQ(instance1, instance2);
+}
 //
 //// Test 4: Test setting and getting data in the Singleton instance
 //TEST(SingletonTest, SetAndGetInSingletonInstance) {
