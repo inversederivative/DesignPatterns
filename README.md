@@ -108,3 +108,14 @@ complexity when there are only a few types of products to create.
 
 ---
 
+### Abstract Factory
+
+The abstract factory is much like the regular Factory Design Patter, however it's the factory for 
+the factory. 
+
+In my example, we have three different vehicle factories, the CarFactory, the MotorcycleFactory, 
+and the BicycleFactory; all of which are instantiated by the AbstractFactory, or the factory of
+factories.
+
+---
+
