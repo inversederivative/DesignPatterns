@@ -74,7 +74,7 @@ Client::Client() {
 }
 
 void Client::BuildSoda(SodaType sodaType) {
-    SodaFactory* sf = new SodaFactory();
+    auto sf = new SodaFactory();
     ptrSoda = sf->build(sodaType);
 
     delete sf;
@@ -85,7 +85,7 @@ Client::~Client() {
     if (ptrSoda)
     {
         delete ptrSoda;
-        ptrSoda = NULL;
+        ptrSoda = nullptr;
     }
 }
 

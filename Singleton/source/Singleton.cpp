@@ -1,12 +1,12 @@
 #include <Singleton.hpp>
 
 // Initialize the instance pointer
-Singleton* Singleton::instancePtr = NULL;
+Singleton* Singleton::instancePtr = nullptr;
 
 Singleton* Singleton::getInstance() {
     // If there is no instance of class
     // then we can create an instance.
-    if (instancePtr == NULL)
+    if (instancePtr == nullptr)
     {
         // We can access private members
         // within the class.

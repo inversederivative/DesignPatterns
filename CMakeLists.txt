@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(Singleton)
 add_subdirectory(Factory)
+add_subdirectory(AbstractFactory)
 
 
 #

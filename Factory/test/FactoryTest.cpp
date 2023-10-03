@@ -35,3 +35,38 @@ TEST(SodaFactoryTest, CreateUnknownSoda) {
     auto unknownSoda = sodaFactory.build(ST_Unknown);
     EXPECT_EQ(unknownSoda, nullptr);
 }
+
+// Test 5: Test building a CocaCola soda with the Client
+TEST(ClientTest, BuildCocaColaSoda) {
+    Client client;
+    client.BuildSoda(ST_CocaCola);
+    auto soda = client.getSoda();
+    EXPECT_NE(soda, nullptr);
+    EXPECT_EQ(soda->getSodaName(), "CocaCola");
+}
+
+// Test 6: Test building a Sprite soda with the Client
+TEST(ClientTest, BuildSpriteSoda) {
+    Client client;
+    client.BuildSoda(ST_Sprite);
+    auto soda = client.getSoda();
+    EXPECT_NE(soda, nullptr);
+    EXPECT_EQ(soda->getSodaName(), "Sprite");
+}
+
+// Test 7: Test building a Fanta soda with the Client
+TEST(ClientTest, BuildFantaSoda) {
+    Client client;
+    client.BuildSoda(ST_Fanta);
+    auto soda = client.getSoda();
+    EXPECT_NE(soda, nullptr);
+    EXPECT_EQ(soda->getSodaName(), "Fanta");
+}
+
+// Test 8: Test building an unknown soda with the Client
+TEST(ClientTest, BuildUnknownSoda) {
+    Client client;
+    client.BuildSoda(ST_Unknown);
+    auto soda = client.getSoda();
+    EXPECT_EQ(soda, nullptr); // Expect nullptr for unknown soda
+}
