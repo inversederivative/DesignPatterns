@@ -10,16 +10,28 @@ class Singleton {
 private:
     std::string name;
 
-    static Singleton* instancePtr;
+    int data;
+
+    static Singleton *instancePtr;
 
     Singleton() = default;
 
 public:
 
     // deleting copy constructor
-    Singleton(const Singleton& obj) = delete;
+    Singleton(const Singleton &obj) = delete;
 
-    static Singleton* getInstance();
+    static Singleton *getInstance();
+
+    void setName(std::string myName);
+
+    std::string getName() const;
+
+    int getData() const;
+
+    void setData(int myData);
+
+
 
 };
 

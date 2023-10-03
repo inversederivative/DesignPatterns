@@ -2,7 +2,6 @@
 // Created by John on 10/2/2023.
 //
 #include <gtest/gtest.h>
-#include <Singleton.hpp>
 #include "../source/Singleton.cpp"
 
 // Test 1: Test that the Singleton class cannot be instantiated directly
@@ -21,7 +20,7 @@ TEST(SingletonTest, SingletonInstanceIsCreatedCorrectly) {
     EXPECT_EQ(dynamic_cast<Singleton*>(instance) != nullptr, true);
 }
 
-//// Test 3: Test that multiple calls to Singleton::getInstance() return the same instance
+// Test 3: Test that multiple calls to Singleton::getInstance() return the same instance
 TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
     // Call Singleton::getInstance() multiple times and store the returned instances
     // Verify that all instances are the same (point to the same memory address)
@@ -29,40 +28,42 @@ TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
     Singleton* instance2 = Singleton::getInstance();
     EXPECT_EQ(instance1, instance2);
 }
-//
-//// Test 4: Test setting and getting data in the Singleton instance
-//TEST(SingletonTest, SetAndGetInSingletonInstance) {
-//    // Create a Singleton instance and set some data in it
-//    // Retrieve the data using the Singleton instance and verify that it's correct
-//    Singleton* instance = Singleton::getInstance();
-//    instance->setData(42); // Replace with your actual method to set data
-//    int data = instance->getData(); // Replace with your actual method to get data
-//    ASSERT_EQ(data, 42);
-//}
-//
-//// Test 5: Test thread-safety of the Singleton pattern
-//TEST(SingletonTest, SingletonIsThreadSafe) {
-//    // Create multiple threads that simultaneously call Singleton::getInstance()
-//    // Verify that all threads obtain the same instance and do not crash
-//    // Implement this test using a testing framework that supports multithreading
-//}
-//
-//// Test 6: Test serialization and deserialization of the Singleton instance
-//TEST(SingletonTest, SingletonCanBeSerializedAndDeserialized) {
-//    // Create a Singleton instance, serialize it, and then deserialize it
-//    // Verify that the deserialized instance is the same as the original one
-//    Singleton* instance = Singleton::getInstance();
-//    // Implement the serialization and deserialization logic here
-//    // Serialize the instance and then deserialize it
-//    Singleton* deserializedInstance = /* Deserialize logic */;
-//    ASSERT_TRUE(instance == deserializedInstance);
-//}
-//
-//// Test 7: Test the Enum Singleton pattern (if you decide to implement it)
-//TEST(SingletonTest, EnumSingletonWorksCorrectly) {
-//    // Test the Enum Singleton implementation (if applicable)
-//    // Verify that it behaves the same as the traditional Singleton
-//    SingletonEnum* enumInstance1 = SingletonEnum::getInstance();
-//    SingletonEnum* enumInstance2 = SingletonEnum::getInstance();
-//    ASSERT_TRUE(enumInstance1 == enumInstance2);
-//}
+
+// Test 4: Test setting and getting data in the Singleton instance
+TEST(SingletonTest, SetAndGetInSingletonInstance) {
+    // Create a Singleton instance and set some data in it
+    // Retrieve the data using the Singleton instance and verify that it's correct
+    Singleton* instance = Singleton::getInstance();
+    instance->setData(42); // Replace with your actual method to set data
+    int data = instance->getData(); // Replace with your actual method to get data
+    EXPECT_EQ(data, 42);
+}
+
+// Test 5: Test thread-safety of the Singleton pattern
+TEST(SingletonTest, SingletonIsThreadSafe) {
+    // Create a flag to signal that all threads have completed
+    std::atomic<bool> allThreadsCompleted(true);
+
+    // Create multiple threads that simultaneously call Singleton::getInstance()
+    const int numThreads = 4; // Adjust the number of threads as needed
+    std::vector<std::thread> threads(numThreads);
+
+    for (int i = 0; i < numThreads; ++i) {
+        threads[i] = std::thread([&allThreadsCompleted]() {
+            // Each thread attempts to get the Singleton instance
+            Singleton* instance = Singleton::getInstance();
+            if (instance == nullptr) {
+                allThreadsCompleted = false; // Signal a failure if any thread gets a null instance
+            }
+        });
+    }
+
+    // Wait for all threads to complete
+    for (int i = 0; i < numThreads; ++i) {
+        threads[i].join();
+    }
+
+    // Verify that all threads obtain the same instance and do not crash
+    EXPECT_EQ(allThreadsCompleted, true);
+}
+

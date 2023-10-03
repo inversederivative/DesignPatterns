@@ -24,3 +24,23 @@ Singleton* Singleton::getInstance() {
         return instancePtr;
     }
 }
+
+void Singleton::setName(std::string myName)
+{
+    name = myName;
+}
+
+std::string Singleton::getName() const
+{
+    return name;
+}
+
+int Singleton::getData() const
+{
+    return data;
+}
+
+void Singleton::setData(int myData)
+{
+    data = myData;
+}
