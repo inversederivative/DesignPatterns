@@ -2,7 +2,6 @@
 // Created by John on 10/2/2023.
 //
 #include <gtest/gtest.h>
-
 #include "../source/Factory.cpp"
 
 // Test 1: Test the creation of a CocaCola object using the factory
