@@ -3,6 +3,11 @@
 // Initialize the instance pointer
 std::shared_ptr<Singleton> Singleton::instancePtr = nullptr;
 
+void Singleton::createInstance()
+{
+    instancePtr = std::shared_ptr<Singleton>(new Singleton);
+}
+
 std::shared_ptr<Singleton> Singleton::getInstance() {
     // If there is no instance of class
     // then we can create an instance.
@@ -43,9 +48,4 @@ int Singleton::getData() const
 void Singleton::setData(int myData)
 {
     data = myData;
-}
-
-void Singleton::createInstance()
-{
-    instancePtr = std::shared_ptr<Singleton>(new Singleton);
 }
