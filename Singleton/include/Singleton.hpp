@@ -2,6 +2,7 @@
 // Created by John on 10/2/2023.
 //
 #include <iostream>
+#include <memory>
 
 #ifndef DESIGNPATTERNS_SINGLETON_H
 #define DESIGNPATTERNS_SINGLETON_H
@@ -12,16 +13,19 @@ private:
 
     int data;
 
-    static Singleton *instancePtr;
+    static std::shared_ptr<Singleton> instancePtr;
+
+    static void createInstance();
 
     Singleton() = default;
 
 public:
 
-    // deleting copy constructor
+    // deleting copy constructor and equals assignment operator
     Singleton(const Singleton &obj) = delete;
+    Singleton& operator=(const Singleton&) = delete;
 
-    static Singleton *getInstance();
+    static std::shared_ptr<Singleton>getInstance();
 
     void setName(std::string myName);
 
@@ -30,6 +34,7 @@ public:
     int getData() const;
 
     void setData(int myData);
+
 
 
 

@@ -1,16 +1,16 @@
 #include <Singleton.hpp>
 
 // Initialize the instance pointer
-Singleton* Singleton::instancePtr = nullptr;
+std::shared_ptr<Singleton> Singleton::instancePtr = nullptr;
 
-Singleton* Singleton::getInstance() {
+std::shared_ptr<Singleton> Singleton::getInstance() {
     // If there is no instance of class
     // then we can create an instance.
     if (instancePtr == nullptr)
     {
         // We can access private members
         // within the class.
-        instancePtr = new Singleton();
+        createInstance();
 
         // returning the instance pointer
         return instancePtr;
@@ -43,4 +43,9 @@ int Singleton::getData() const
 void Singleton::setData(int myData)
 {
     data = myData;
+}
+
+void Singleton::createInstance()
+{
+    instancePtr = std::shared_ptr<Singleton>(new Singleton);
 }

@@ -15,17 +15,17 @@ TEST(SingletonTest, CannotInstantiateDirectly) {
 TEST(SingletonTest, SingletonInstanceIsCreatedCorrectly) {
     // Use the Singleton::getInstance() method to create an instance
     // Verify that the returned instance is not null and is of the correct type
-    Singleton* instance = Singleton::getInstance();
+    std::shared_ptr<Singleton> instance = Singleton::getInstance();
     EXPECT_EQ(instance != nullptr, true);
-    EXPECT_EQ(dynamic_cast<Singleton*>(instance) != nullptr, true);
+    EXPECT_EQ(std::dynamic_pointer_cast<Singleton>(instance) != nullptr, true);
 }
 
 // Test 3: Test that multiple calls to Singleton::getInstance() return the same instance
 TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
     // Call Singleton::getInstance() multiple times and store the returned instances
     // Verify that all instances are the same (point to the same memory address)
-    Singleton* instance1 = Singleton::getInstance();
-    Singleton* instance2 = Singleton::getInstance();
+    std::shared_ptr<Singleton> instance1 = Singleton::getInstance();
+    std::shared_ptr<Singleton> instance2 = Singleton::getInstance();
     EXPECT_EQ(instance1, instance2);
 }
 
@@ -33,7 +33,7 @@ TEST(SingletonTest, SameInstanceForMultipleCallsToGetInstance) {
 TEST(SingletonTest, SetAndGetInSingletonInstance) {
     // Create a Singleton instance and set some data in it
     // Retrieve the data using the Singleton instance and verify that it's correct
-    Singleton* instance = Singleton::getInstance();
+    std::shared_ptr<Singleton> instance = Singleton::getInstance();
     instance->setData(42); // Replace with your actual method to set data
     int data = instance->getData(); // Replace with your actual method to get data
     EXPECT_EQ(data, 42);
@@ -51,7 +51,7 @@ TEST(SingletonTest, SingletonIsThreadSafe) {
     for (int i = 0; i < numThreads; ++i) {
         threads[i] = std::thread([&allThreadsCompleted]() {
             // Each thread attempts to get the Singleton instance
-            Singleton* instance = Singleton::getInstance();
+            std::shared_ptr<Singleton> instance = Singleton::getInstance();
             if (instance == nullptr) {
                 allThreadsCompleted = false; // Signal a failure if any thread gets a null instance
             }
