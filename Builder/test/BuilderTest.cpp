@@ -86,3 +86,30 @@ TEST(BuilderClientTest, CustomLaptopComputer) {
     // Clean up
     delete laptopComputer;
 }
+
+TEST(BuilderClientTest, AssembleMicrocontroller) {
+    MicrocontrollerBuilder microcontrollerBuilder;
+
+    // Redirect standard output to a stringstream for testing
+    std::stringstream output;
+    std::streambuf* old_cout = std::cout.rdbuf(output.rdbuf());
+
+    // Assemble a desktop computer with specific configuration
+    Client::assembleMicrocontroller(&microcontrollerBuilder);
+
+    // Get the result (DesktopComputer)
+    Computer* microcontroller = microcontrollerBuilder.getResult();
+
+    // Display the result
+    Client::displayComputerDetails(microcontroller);
+
+    // Restore standard output
+    std::cout.rdbuf(old_cout);
+
+    // Verify the output matches the expected result
+    std::string expectedOutput = "Microcontroller Details:\nCPU: ARM Cortex M4\nRAM: 512 MB\nStorage: 128 MB\nPeripherals: GPIO, Debug-Port, InputButton, OutputLED\n";
+    EXPECT_EQ(output.str(), expectedOutput);
+
+    // Clean up
+    delete microcontroller;
+}

@@ -63,6 +63,26 @@ public:
     void showDetails() override;
 };
 
+class Microcontroller : public Computer {
+private:
+    std::string cpu;
+    int ram;
+    int storage;
+    std::vector<std::string> peripherals;
+
+public:
+    void setCPU(const std::string& cpu) override;
+
+    void setRAM(int myRam) override;
+
+    void setStorage(int myStorage) override;
+
+    void setPeripherals(const std::vector<std::string>& myPeripherals) override;
+
+    void showDetails() override;
+};
+
+
 class ComputerBuilder {
 public:
     virtual void setCPU(const std::string& cpu) = 0;
@@ -119,6 +139,25 @@ public:
     Computer* getResult() override;
 };
 
+class MicrocontrollerBuilder : public ComputerBuilder
+{
+private:
+    Microcontroller* microcontroller;
+
+public:
+    MicrocontrollerBuilder();
+
+    void setCPU(const std::string& cpu) override;
+
+    void setRAM(int ram) override;
+
+    void setStorage(int storage) override;
+
+    void setPeripherals(const std::vector<std::string>& peripherals) override;
+
+    Computer* getResult() override;
+};
+
 class ComputerDirector {
 private:
     ComputerBuilder* builder;
@@ -129,8 +168,9 @@ public:
 
     }
 
-    void buildDesktopComputer();
-    void buildLaptopComputer();
+    void buildDefaultDesktopComputer();
+    void buildDefaultLaptopComputer();
+    void buildDefaultMicrocontroller();
 };
 
 class Client
@@ -139,6 +179,8 @@ public:
     static void assembleDesktopComputer(ComputerBuilder* builder);
 
     static void assembleLaptopComputer(ComputerBuilder* builder);
+
+    static void assembleMicrocontroller(ComputerBuilder* builder);
 
     static void displayComputerDetails(Computer* computer);
 };
