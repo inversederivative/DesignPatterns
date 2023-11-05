@@ -58,6 +58,12 @@ robust and maintainable software systems.
 
 ---
 
+
+## Creational Patterns
+
+---
+
+
 ### Singleton
 
 **Intent:** Ensure a class has only one instance and provide a global point of access to that 
@@ -69,7 +75,9 @@ system.
 **Structure:**
 
     Private constructor to prevent external instantiation.
+
     Private static instance variable to hold the single instance.
+
     Public static method (usually named getInstance()) to get the instance.
 
 **Usage:** Use the Singleton pattern when you need to guarantee a single instance of a class and 
@@ -94,7 +102,9 @@ create objects without needing to know the specific class or constructor details
 **Structure:**
 
     An abstract Factory interface or class that declares a method for creating objects (often called create).
+    
     Concrete Factory classes that implement the Factory interface and provide specific implementations of object creation.
+    
     Concrete Product classes that represent the objects being created.
 
 **Usage:** Use the Factory pattern when you want to centralize and abstract the process of object 
@@ -118,4 +128,29 @@ and the BicycleFactory; all of which are instantiated by the AbstractFactory, or
 factories.
 
 ---
+
+### Builder
+
+**Intent:** Separates the construction of a complex object from its representation, allowing the same construction process to create different representations. It falls under the creational design pattern category.
+
+**Motivation:** To create objects with multiple, optional components in a systematic and consistent way, allowing clients to construct complex objects without having to specify their detailed configuration.
+
+**Structure:**
+
+    Director: Coordinates the construction steps, often abstracting them from the client. It interacts with the builder to assemble the product.
+    
+    Builder: Defines an interface for creating the parts of the complex object. It includes methods to set various properties of the product.
+    
+    Concrete Builder: Implements the builder interface to construct and assemble parts of the product. It can vary the representation of the product.
+    
+    Product: Represents the complex object being constructed. It typically has a final representation that's assembled by the builder.
+    
+    Client: Initiates the construction process by working with the director and builder to create the product.
+
+
+**Usage:** Use the Builder pattern when you need to create complex objects with multiple components, allowing for variations in product representation, and to provide a clear separation between the construction process and the final product.
+
+**Pros:** Encourages flexible and consistent construction of complex objects, allows the creation of different product representations, and simplifies the addition of new builder classes for varying products.
+
+**Cons:** Can add complexity to the codebase, especially for simple products, and requires the client to interact with the director and builder, which may be unnecessary in some cases.
 
