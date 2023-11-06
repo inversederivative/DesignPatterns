@@ -2,6 +2,7 @@
 // Created by John on 10/2/2023.
 //
 #include <iostream>
+#include <memory>
 
 #ifndef DESIGNPATTERNS_FACTORY_H
 #define DESIGNPATTERNS_FACTORY_H
@@ -51,7 +52,8 @@ class Fanta : public Soda
 class SodaFactory
 {
 public:
-    Soda* build(SodaType sodaType);
+    std::unique_ptr<Soda> build(SodaType sodaType);
+    //Soda* build(SodaType sodaType);
 
 
 };
@@ -61,7 +63,7 @@ class Client
 
 private:
 
-    Soda* ptrSoda;
+    std::unique_ptr<Soda> ptrSoda;
 
 public:
     Client();
@@ -70,7 +72,7 @@ public:
 
     ~Client();
 
-    Soda* getSoda();
+    std::unique_ptr<Soda> getSoda();
 
 
 };

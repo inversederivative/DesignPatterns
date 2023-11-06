@@ -41,24 +41,24 @@ void Fanta::printSodaInfo() {
     std::cout << "This soda is: " << name << std::endl;
 }
 
-Soda* SodaFactory::build(SodaType sodaType) {
+std::unique_ptr<Soda> SodaFactory::build(SodaType sodaType) {
     switch (sodaType)
     {
         case ST_CocaCola:
         {
-            Soda* coke = new CocaCola();
+            std::unique_ptr<Soda> coke = std::make_unique<CocaCola>();
             coke->setSodaName("CocaCola");
             return coke;
         }
         case ST_Sprite:
         {
-            Soda* sprite = new Sprite();
+            std::unique_ptr<Soda> sprite = std::make_unique<Sprite>();
             sprite->setSodaName("Sprite");
             return sprite;
         }
         case ST_Fanta:
         {
-            Soda* fanta = new Fanta();
+            std::unique_ptr<Soda> fanta = std::make_unique<Fanta>();
             fanta->setSodaName("Fanta");
             return fanta;
         }
@@ -84,11 +84,10 @@ Client::~Client() {
 
     if (ptrSoda)
     {
-        delete ptrSoda;
         ptrSoda = nullptr;
     }
 }
 
-Soda* Client::getSoda() {
-    return ptrSoda;
+std::unique_ptr<Soda> Client::getSoda() {
+    return std::move(ptrSoda);
 }
